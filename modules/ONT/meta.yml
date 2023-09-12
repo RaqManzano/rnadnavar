@@ -1,0 +1,49 @@
+name: long_reads
+description: |
+  The module adds the ability to analyse Oxford Nanopore Technologies data
+keywords:
+  - ONT
+  - sequencing
+tools:
+  - minimap2:
+      description: Tool for aligning reads to a genome
+
+      documentation: https://github.com/lh3/minimap2
+
+      licence: ["MIT"]
+  - samtools:
+      description: Tool for manipulating BAM/SAM/CRAM files
+
+      documentation: https://www.htslib.org/
+
+      licence: ["MIT/Expat"]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', single_end:false ]
+  - inputbam:
+      type: file
+      description: BAM/CRAM/SAM file
+      pattern: "*.{bam,cram,sam}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', single_end:false ]
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - reads:
+      type: file
+      description: |
+      	Mapped bam file.
+      pattern: "*.bam"
+
+authors:
+  - "@HJeffery"
