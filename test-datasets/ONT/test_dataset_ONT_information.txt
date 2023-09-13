@@ -1,0 +1,36 @@
+# ONT test datasets 
+
+Both the DNA and RNA datasets are for MCF-7 breast cancer cell lines. 
+
+For the test data both datasets have been filtered for chr20 to make it an appropriate size for analysis.
+
+# DNA
+The DNA data is sequenced using a targeted cas9 approach. 
+This data came in the format of fast5's (raw data from an ONT sequencer). 
+Therefore, it was rebasecalled with guppy (v6.4.6) and the sup (super high accuracy) R9.4.1 E8.2 model. 
+
+Basecalling command used:
+/path/to/ont-guppy6.4.6/bin/guppy_basecaller \
+    -x cuda:0 \
+    -r \
+    -i /path/to/TG_04_Mcf7_brPanel_MinION_fast5 \
+    -s /path/to/output/folder \
+    -c /path/to/model/ont-guppy6.4.6/data/dna_r9.4.1_e8.1_sup.cfg
+
+
+gDNA (cas9) data: https://www.ncbi.nlm.nih.gov/sra/SRX7670093
+Paper: https://www.biorxiv.org/content/10.1101/604173v2.full.pdf
+
+
+# RNA 
+
+The RNA data comes from the Singapore Nanopore-Expression Project which looks at 5 cancer cell lines.
+
+Github: https://github.com/GoekeLab/sg-nex-data
+Data: https://github.com/GoekeLab/sg-nex-data/blob/master/docs/AWS_data_access_tutorial.md
+Using this cDNA run: SGNex_MCF7_cDNA_replicate1_run3/
+Note: There is also dRNA data here which could be tried (plus replicates of both types)
+SGNex_MCF7_directRNA_replicate1_run1/
+
+The available data can be checked using this command:
+aws s3 ls --no-sign-request s3://sg-nex-data/data/sequencing_data_ont/bam/genome/
